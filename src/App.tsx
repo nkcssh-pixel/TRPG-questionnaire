@@ -237,45 +237,13 @@ export default function App() {
                   <CheckCircle2 className="w-8 h-8 group-hover:scale-110 transition-transform" />
                 </div>
                 <h1 className="text-3xl font-semibold tracking-tight">问卷已提交</h1>
-                <p className="text-neutral-500">数据已生成信效度分析报告如下：</p>
+                <p className="text-neutral-500">感谢反馈！以下是您的问卷回顾与信效度分析：</p>
               </div>
 
-              <div className="grid gap-6">
-                <AnalysisCard 
-                  title="检测一：世界逻辑验证" 
-                  subtitle="Q1 真实感 vs Q2 巧合感" 
-                  icon={<Target className="w-5 h-5" />}
-                  conclusion={report.detection1.conclusion} 
-                />
-                <AnalysisCard 
-                  title="检测二：归因偏好分析" 
-                  subtitle="Q2 巧合感 vs Q5 主持倾向" 
-                  icon={<TrendingUp className="w-5 h-5" />}
-                  conclusion={report.detection2.conclusion} 
-                />
-                <AnalysisCard 
-                  title="检测三：心流转换效率" 
-                  subtitle="Q7 沉浸度 vs Q1-4 综合感" 
-                  icon={<Zap className="w-5 h-5" />}
-                  conclusion={report.detection3.conclusion} 
-                />
-                <AnalysisCard 
-                  title="检测四：重量感存在证明" 
-                  subtitle="Q8 真实决策证据" 
-                  icon={<BarChart3 className="w-5 h-5" />}
-                  conclusion={report.detection4.conclusion} 
-                />
-                <AnalysisCard 
-                  title="检测五：总体忠诚度评价" 
-                  subtitle="Q9 体验评分 vs Q10 参加意愿" 
-                  icon={<UserCheck className="w-5 h-5" />}
-                  conclusion={report.detection5.conclusion} 
-                />
-              </div>
-
-              <div className="space-y-8">
+              {/* 问卷内容回顾 */}
+              <div className="space-y-6">
                 <div className="flex items-center gap-2 px-2">
-                  <BarChart3 className="w-5 h-5 text-neutral-400" />
+                  <BarChart3 className="w-5 h-5 text-neutral-900" />
                   <h2 className="text-xl font-semibold">问卷内容回顾</h2>
                 </div>
                 
@@ -283,22 +251,62 @@ export default function App() {
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="bg-neutral-50 border-b border-neutral-200 text-neutral-500">
-                        <th className="px-6 py-4 text-left font-medium">题目</th>
-                        <th className="px-6 py-4 text-left font-medium">玩家回答</th>
+                        <th className="px-5 py-4 text-left font-medium w-1/2">题目</th>
+                        <th className="px-5 py-4 text-left font-medium">回答内容</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-neutral-100">
                       {getAllAnsweredQuestions(QUESTIONS, answers).map(item => (
-                        <tr key={item.id} className={item.highlight ? "bg-amber-50/50" : ""}>
-                          <td className="px-6 py-4 text-neutral-600 align-top w-1/2">{item.text}</td>
-                          <td className={`px-6 py-4 align-top ${item.highlight ? "text-amber-900 font-medium" : "text-neutral-900"}`}>
-                            {item.highlight && <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wider bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded mb-1 block w-fit">GM重点关注</span>}
-                            {item.answer || <span className="text-neutral-300 italic">未填</span>}
+                        <tr key={item.id} className={item.highlight ? "bg-amber-50" : ""}>
+                          <td className="px-5 py-4 text-neutral-500 align-top leading-relaxed">{item.text}</td>
+                          <td className={`px-5 py-4 align-top leading-relaxed ${item.highlight ? "text-amber-900 font-medium" : "text-neutral-900"}`}>
+                            {item.highlight && <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wider bg-amber-200 text-amber-800 px-1.5 py-0.5 rounded mb-1.5 block w-fit">重要留言</span>}
+                            <div className="whitespace-pre-wrap">{item.answer || <span className="text-neutral-300 italic">未填</span>}</div>
                           </td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
+                </div>
+              </div>
+
+              {/* 信效度分析报告 */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-2 px-2">
+                  <Target className="w-5 h-5 text-neutral-900" />
+                  <h2 className="text-xl font-semibold">信效度自动化分析报告</h2>
+                </div>
+                <div className="grid gap-4">
+                  <AnalysisCard 
+                    title="检测一：世界逻辑验证" 
+                    subtitle="Q1 真实感 vs Q2 巧合感" 
+                    icon={<Target className="w-5 h-5" />}
+                    conclusion={report.detection1.conclusion} 
+                  />
+                  <AnalysisCard 
+                    title="检测二：归因偏好分析" 
+                    subtitle="Q2 巧合感 vs Q5 主持倾向" 
+                    icon={<TrendingUp className="w-5 h-5" />}
+                    conclusion={report.detection2.conclusion} 
+                  />
+                  <AnalysisCard 
+                    title="检测三：心流转换效率" 
+                    subtitle="Q7 沉浸度 vs Q1-4 综合感" 
+                    icon={<Zap className="w-5 h-5" />}
+                    conclusion={report.detection3.conclusion} 
+                  />
+                  <AnalysisCard 
+                    title="检测四：重量感存在证明" 
+                    subtitle="Q8 真实决策证据" 
+                    icon={<BarChart3 className="w-5 h-5" />}
+                    conclusion={report.detection4.conclusion} 
+                  />
+                  <AnalysisCard 
+                    title="检测五：总体忠诚度评价" 
+                    subtitle="Q9 体验评分 vs Q10 参加意愿" 
+                    icon={<UserCheck className="w-5 h-5" />}
+                    conclusion={report.detection5.conclusion} 
+                  />
                 </div>
               </div>
 
