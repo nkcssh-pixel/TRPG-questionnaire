@@ -1,0 +1,6 @@
+{
+  "name": "TRPG跑团反馈与信效度评估",
+  "description": "专业的跑团反馈系统，内置自动化的信效度评分与分析逻辑，帮助主持人精准复盘。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
